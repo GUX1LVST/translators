@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Morse Code</title>
+</head>
+<style type="text/css">
+	html, body {
+		margin: 0;
+		padding: 0;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 14px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	main {
+		display: flex;
+		flex-direction: column;
+		align-self: center;
+		width: 90%;
+		max-width: 800px;
+	}
+
+	main > div {
+		display: flex;
+		flex-direction: column;
+	}
+
+	h1 {
+		font-size: 3em;
+	}
+
+	input[type="text"] {
+		margin: 5px;
+		padding: 5px;
+		font-size: 1.5em;
+	}
+
+	button {
+		margin: 5px;
+		padding: 10px;
+		font-size: 1em;
+	}
+
+</style>
+<body>
+	<main>
+		<h1>Morse code converter</h1>
+		<div>
+			<input type="text" name="code" id="textInput" />
+			<button name="button-letters" onclick="convertToLetters()">
+				To Letters
+			</button>
+			<button name="button-morse" onclick="convertToMorse()">
+				To Morse
+			</button>
+		</div>
+	</main>
+
+
+	<script type="text/javascript">
+		const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ".split("");
+		const morseCode = [ ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----", "/" ];
+
+		function convertToMorse() {
+			try {
+				const input = document.getElementById("textInput");
+				const letters = input.value || "";
+				const code = letters.split("").map(l => (morseCode[alphabet.indexOf(l.toUpperCase())])).join(" ");
+				input.value = code;
+			} catch(e) {
+				console.log(e);
+			}
+		}
+
+		function convertToLetters() {
+			try {
+				const input = document.getElementById("textInput");
+				const morse = input.value || "";
+				const letters = morse.split(" ").map(code => (alphabet[morseCode.indexOf(code.trim())])).join("");
+				input.value = letters;
+			} catch (e) {
+				console.log(e);
+			}
+
+		}
+
+
+	</script> 
+</body>
+</html>
